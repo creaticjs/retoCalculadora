@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Page Title</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body style="background-color: cornsilk;">
+    <div class="centrar" >
+        <h1> CALCULADORA </h1>
+        <input readOnly="false" type="text" id="resultado" value="">
+        <table align="center">
+            <tr>
+                <td><button onclick="escribirValor(1)">1</button></td>
+                <td><button onclick="escribirValor(2)">2</button></td>
+                <td><button onclick="escribirValor(3)">3</button></td>
+                <td class="btnOperar"><button onclick="operar(1)">+</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="escribirValor(4)">4</button></td>
+                <td><button onclick="escribirValor(5)">5</button></td>
+                <td><button onclick="escribirValor(6)">6</button></td>
+                <td class="btnOperar"><button onclick="operar(2)">-</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="escribirValor(7)">7</button></td>
+                <td><button onclick="escribirValor(8)">8</button></td>
+                <td><button onclick="escribirValor(9)">9</button></td>
+                <td class="btnOperar"><button onclick="operar(3)">*</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="limpiar()">D</button></td>
+                <td><button onclick="darResultado()">=</button></td>
+                <td><button>C</button></td>
+                <td class="btnOperar"><button onclick="operar(4)">/</button></td>
+            </tr>
+        </table>
+    </div>
+</body>
+<script>
+    var numeros = [];
+    var operaciones = [];
+    var a = '';
+    function escribirValor(value) {
+        a = a + '' + value;
+        document.getElementById('resultado').value = a;
+    }
+
+    function darResultado() {
+        numeros.push(a);
+        var resultado = numeros[0];
+        var i;
+        for (i = 0; i < numeros.length; i++) {
+            if (numeros[i + 1]) {
+                resultado = validarOperacion(resultado, numeros[i + 1], operaciones[i]);
+            }
+        }
+        numeros = [];
+        operaciones = [];
+        a = resultado;
+        numeros.push(a);
+        console.log(numeros);
+        document.getElementById('resultado').value = resultado;
+    }
+
+    function validarOperacion(num1, num2, operacion) {
+        var res = num1;
+        num1 = parseFloat(num1);
+        num2 = parseFloat(num2);
+        switch (operacion) {
+            case 1:
+                res = num1 + num2;
+                break;
+            case 2:
+                res = num1 - num2;
+                break;
+            case 3:
+                res = num1 * num2;
+                break;
+            case 4:
+                res = num1 / num2;
+                break;
+        }
+        return res;
+
+    }
+
+    function operar(operacion) {
+        numeros.push(a);
+        a = '';
+        document.getElementById('resultado').value = a;
+        operaciones.push(operacion);
+    }
+
+    function limpiar() {
+        a = '';
+        b = '';
+        numeros = [];
+        operaciones = [];
+        document.getElementById('resultado').value = '';
+    }
+
+</script>
+
+</html>
