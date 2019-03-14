@@ -1,6 +1,7 @@
 h1{
-    color:darkslategray;
+    color:white;
     text-align: center;
+    background: black;
 }
 .centrar{
     width: 300px;
@@ -21,3 +22,17 @@ button:hover {
     background-color: blue;
     color: beige;
 }
+
+.btnOperar{
+    background: cadetblue;
+}
+
+.btnOperar:hover{
+    background-color: black;
+    color: white;
+}
+
+table{
+    background: gray;
+}
+
